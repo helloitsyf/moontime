@@ -17,6 +17,21 @@ export class HomePage {
 
   }
   ionViewDidEnter() {
+    this.refresh();
+
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.refresh();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
+  refresh(){
 
     this.total = 0;
     this.priceArr = [];
@@ -35,13 +50,8 @@ export class HomePage {
           this.total = this.total + this.holdingsArr[i].qty*data[0].price_usd;
         });
       }
-    }).then(()=>{
-
-
-    });
-
+    })
   }
-
 
   addNew() {
     this.navCtrl.push("CreatePage");
@@ -55,6 +65,7 @@ export class HomePage {
   clear() {
     this.msp.storageRef().clear();
     this.holdingsArr = [];
+    this.total = 0;
   }
 
 

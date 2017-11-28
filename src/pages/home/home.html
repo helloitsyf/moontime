@@ -16,6 +16,9 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
 TOTAL:{{total}}
   <ion-list>
       <ion-item *ngFor="let holding of holdingsArr; let i=index">
