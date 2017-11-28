@@ -16,7 +16,7 @@
 </ion-header>
 
 <ion-content padding>
-
+TOTAL:{{total}}
   <ion-list>
       <ion-item *ngFor="let holding of holdingsArr; let i=index">
         {{holding.id}} {{holding.qty}} {{priceArr[i][0].price_usd}}

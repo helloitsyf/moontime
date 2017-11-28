@@ -10,7 +10,6 @@ export class HomePage {
 
   public holdingsArr;
   public total;
-  public dataArr;
   public priceArr;
 
   constructor(public msp: MyServiceProvider, public navCtrl: NavController) {
@@ -19,9 +18,8 @@ export class HomePage {
   }
   ionViewDidEnter() {
 
-
+    this.total = 0;
     this.priceArr = [];
-    this.dataArr = [];
     //get holdingsArr from storageRef
     this.msp.getHoldings().then((data) => {
       this.holdingsArr = data;
@@ -34,8 +32,12 @@ export class HomePage {
         this.msp.getRemoteData(url).then((data) => {
           //this.dataArr.push(data);
           this.priceArr.push(data);
+          this.total = this.total + this.holdingsArr[i].qty*data[0].price_usd;
         });
       }
+    }).then(()=>{
+
+
     });
 
   }
@@ -51,7 +53,7 @@ export class HomePage {
   }
 
   clear() {
-    this.msp.storageRef().clear;
+    this.msp.storageRef().clear();
     this.holdingsArr = [];
   }
 
